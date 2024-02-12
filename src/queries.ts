@@ -1,10 +1,16 @@
 import {gql } from '@apollo/client';
 
 export const GET_COUNTRIES = gql`
-    query Countries {
+    query Countries{
         countries {
             name
-            code
+            languages{
+                name
+            }
+            currency
+            continent {
+                name
+            }
         }
     }
 `;
