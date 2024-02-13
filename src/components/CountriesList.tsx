@@ -62,13 +62,6 @@ function CountriesList(props: IProps) {
 
   const [selectedColor, setSelectedColor] = useState<string>(ColorSet[0]);
 
-  //load the countries only when the data changes
-  useEffect(() => {
-    if (data) {
-      // setCountries(data.countries);
-    }
-  }, [data]);
-
   //filter when the filterValue changes
   useEffect(() => {
     //if all the filter values are empty, return empty array. Means nothing was searched

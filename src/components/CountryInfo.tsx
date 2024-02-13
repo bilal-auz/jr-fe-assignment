@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { GET_COUNTRY } from "../queries";
 
 //country info type
-type CountryInfo = {
+type CountryData = {
   name: string;
   languages: Array<{
     name: string;
@@ -22,7 +22,7 @@ function CountryInfo({ selectedCountry }: IProps) {
     variables: { code: selectedCountry },
   });
 
-  const [country, setCountry] = useState<CountryInfo>({} as CountryInfo);
+  const [country, setCountry] = useState<CountryData>({} as CountryData);
   const [countryLoaded, setCountryLoaded] = useState(false);
 
   //fetch the country
@@ -33,7 +33,7 @@ function CountryInfo({ selectedCountry }: IProps) {
 
     if (data.error) return alert("Error fetching country"); //handle error
 
-    setCountry(data.data.country as CountryInfo);
+    setCountry(data.data.country as CountryData);
 
     setCountryLoaded(true);
   };
