@@ -133,9 +133,14 @@ function CountriesList(props: IProps) {
   };
 
   const handleSelectedCountry = (code: string) => {
-    const newColor = generateNewColor();
-    setSelectedColor(newColor);
-    props.setSelectedCountry(code);
+    //if the selected country is the same as the previous one, deselect it
+    if (code === props.selectedCountry) {
+      props.setSelectedCountry("");
+    } else {
+      const newColor = generateNewColor();
+      setSelectedColor(newColor);
+      props.setSelectedCountry(code);
+    }
   };
 
   const generateNewColor = () => {

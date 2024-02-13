@@ -40,7 +40,7 @@ function CountryInfo({ selectedCountry }: IProps) {
 
   //fetch the country when the selected country changes. If no country is selected, do nothing.
   useEffect(() => {
-    if (!selectedCountry) return;
+    if (!selectedCountry) return setCountryLoaded(false);
     fetchCountry();
   }, [selectedCountry]);
 
