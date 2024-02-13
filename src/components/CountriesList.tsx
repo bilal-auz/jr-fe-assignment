@@ -9,6 +9,7 @@ type Country = {
   continent: {
     name: string;
   };
+  code: string;
 };
 
 type CountiresQuery = {
@@ -34,7 +35,7 @@ enum Continent {
   ANTARCTICA = "Antarctica",
 }
 
-function CountriesList() {
+function CountriesList(props: IProps) {
   const { data, loading, error }: CountiresQuery = useQuery(GET_COUNTRIES);
 
   const [countries, setCountries] = useState<Country[] | undefined>([]);
@@ -177,6 +178,7 @@ function CountriesList() {
                     type="button"
                     className="btn btn-sm bg-transparent border-none outline-none shadow-none text-black text-base font-medium w-full h-fit text-wrap flex flex-row justify-start text-left hover:bg-gray-300"
                     value={country.name}
+                    onClick={() => props.setSelectedCountry(country.code)}
                   />
                 </li>
               ))}
