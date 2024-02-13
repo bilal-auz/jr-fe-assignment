@@ -115,7 +115,21 @@ function CountriesList(props: IProps) {
       return conditions.every((condition) => condition);
     });
 
-    setCountries(filteredCountries);
+    if (filteredCountries) {
+      setCountries(filteredCountries);
+
+      const countriesLength = filteredCountries?.length;
+
+      //if the filtered countries are less than 10, select the last country. Otherwise select the 10th country
+      if (countriesLength < 10) {
+        handleSelectedCountry(filteredCountries[countriesLength - 1]?.code);
+      } else {
+        handleSelectedCountry(filteredCountries[9]?.code);
+      }
+    } else {
+      setCountries([]);
+      props.setSelectedCountry("");
+    }
   };
 
   const handleSelectedCountry = (code: string) => {
@@ -204,9 +218,12 @@ function CountriesList(props: IProps) {
         )) || (
           <div className="overflow-y-scroll px-1">
             <ul className="text-left">
-              {countries?.map((country: Country) => (
-                <li className="mb-2" key={country.code}>
-                  <input
+              {countries?.map((country: Country, index) => (
+                <li
+                  className="mb-2 flex flex-row items-center "
+                  key={country.code}
+                >
+                  <button
                     type="button"
                     className="btn btn-sm bg-transparent border-none outline-none shadow-none text-black text-base font-medium w-full h-fit text-wrap flex flex-row justify-start text-left hover:bg-gray-300"
                     style={{
@@ -217,7 +234,10 @@ function CountriesList(props: IProps) {
                     }}
                     value={country.name}
                     onClick={() => handleSelectedCountry(country.code)}
-                  />
+                  >
+                    <span className="text-xs text-gray-300">{index + 1}</span>
+                    {country.name}
+                  </button>
                 </li>
               ))}
             </ul>
