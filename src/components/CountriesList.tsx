@@ -35,6 +35,20 @@ enum Continent {
   ANTARCTICA = "Antarctica",
 }
 
+//Color Set for the selected button
+const ColorSet = [
+  "#FF0000",
+  "#00FF00",
+  "#0000FF",
+  "#FFFF00",
+  "#FF00FF",
+  "#00FFFF",
+  "#800080",
+  "#FFA500",
+  "#008000",
+  "#A52A2A",
+];
+
 function CountriesList(props: IProps) {
   const { data, loading, error }: CountiresQuery = useQuery(GET_COUNTRIES);
 
@@ -45,6 +59,8 @@ function CountriesList(props: IProps) {
     language: "",
     continent: "",
   });
+
+  const [selectedColor, setSelectedColor] = useState<string>(ColorSet[0]);
 
   //load the countries only when the data changes
   useEffect(() => {
@@ -102,7 +118,23 @@ function CountriesList(props: IProps) {
     setCountries(filteredCountries);
   };
 
-  //if error while querying return render message
+  const handleSelectedCountry = (code: string) => {
+    const newColor = generateNewColor();
+    setSelectedColor(newColor);
+    props.setSelectedCountry(code);
+  };
+
+  const generateNewColor = () => {
+    //remove the currently selected color from the ColorSet, so that it doesn't repeat
+    const NewColorSet = ColorSet.filter((color) => color !== selectedColor);
+
+    const buttonColor =
+      NewColorSet[Math.floor(Math.random() * NewColorSet.length)];
+
+    return buttonColor;
+  };
+
+  //if error while querying return error message
   if (error) return <p className="text-sm">{error.message}</p>;
 
   return (
@@ -173,12 +205,18 @@ function CountriesList(props: IProps) {
           <div className="overflow-y-scroll px-1">
             <ul className="text-left">
               {countries?.map((country: Country) => (
-                <li className="mb-2">
+                <li className="mb-2" key={country.code}>
                   <input
                     type="button"
                     className="btn btn-sm bg-transparent border-none outline-none shadow-none text-black text-base font-medium w-full h-fit text-wrap flex flex-row justify-start text-left hover:bg-gray-300"
+                    style={{
+                      backgroundColor:
+                        props.selectedCountry === country.code
+                          ? selectedColor
+                          : "",
+                    }}
                     value={country.name}
-                    onClick={() => props.setSelectedCountry(country.code)}
+                    onClick={() => handleSelectedCountry(country.code)}
                   />
                 </li>
               ))}
