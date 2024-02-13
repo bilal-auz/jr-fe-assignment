@@ -125,9 +125,9 @@ function CountriesList(props: IProps) {
     }
   };
 
-  const handleSelectedCountry = (code: string) => {
-    //if the selected country is the same as the previous one, deselect it
-    if (code === props.selectedCountry) {
+  const handleSelectedCountry = (code: string, e?: HTMLButtonElement) => {
+    //if the selected country is the same as the previous one and it comes from the event OnClick, deselect it
+    if (code === props.selectedCountry && e) {
       props.setSelectedCountry("");
     } else {
       const newColor = generateNewColor();
@@ -231,7 +231,12 @@ function CountriesList(props: IProps) {
                           : "",
                     }}
                     value={country.name}
-                    onClick={() => handleSelectedCountry(country.code)}
+                    onClick={(e) =>
+                      handleSelectedCountry(
+                        country.code,
+                        e.target as HTMLButtonElement
+                      )
+                    }
                   >
                     <span className="text-xs text-gray-300">{index + 1}</span>
                     {country.name}
