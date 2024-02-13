@@ -152,8 +152,8 @@ function CountriesList(props: IProps) {
   if (error) return <p className="text-sm">{error.message}</p>;
 
   return (
-    <div className="">
-      <div className="flex flex-col px-5 py-2 rounded-md bg-white text-black w-2/3 h-full max-h-full">
+    <div className="flex flex-row justify-center w-96 md:w-fit">
+      <div className="flex flex-col px-5 py-2 rounded-md bg-white text-black w-11/12 min-w-12 h-full max-h-96 md:max-h-full">
         <p className="text-center text-base font-bold">Country Search</p>
         <input
           className="input input-sm mb-2 bg-transparent border-black focus:border-black focus:ring-0 focus:outline-blue-200 placeholder:text-gray-500 placeholder:text-xs placeholder:italic"
@@ -193,7 +193,7 @@ function CountriesList(props: IProps) {
         </div>
 
         <select
-          className="select select-bordered select-sm max-w-xs mb-2 bg-transparent border-black focus:border-black focus:ring-0 focus:outline-blue-200 italic text-xs"
+          className="select select-bordered select-sm max-w-sm mb-2 bg-transparent border-black focus:border-black focus:ring-0 focus:outline-blue-200 italic text-xs"
           onChange={(e) =>
             setFilterValue((prev) => {
               return { ...prev, continent: e.target.value };

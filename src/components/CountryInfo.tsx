@@ -45,7 +45,7 @@ function CountryInfo({ selectedCountry }: IProps) {
   }, [selectedCountry]);
 
   return (
-    <div className="bg-white w-1/2 rounded-md">
+    <div className="w-96 md:w-1/2 rounded-md px-4">
       {!selectedCountry && (
         <p className="text-black text-sm italic">No Selected Country...</p>
       )}
@@ -53,8 +53,8 @@ function CountryInfo({ selectedCountry }: IProps) {
         <span className="loading loading-spinner text-info"></span>
       )) ||
         (countryLoaded && (
-          <div className="flex flex-col items-center text-black">
-            <p className="text-4xl font-bold">
+          <div className="bg-white rounded-md flex flex-col items-center text-black h-full">
+            <p className="text-2xl md:text-4xl font-bold">
               {country?.name} ({country?.native})
             </p>
 
@@ -62,45 +62,47 @@ function CountryInfo({ selectedCountry }: IProps) {
               {country.emoji}
             </div>
 
-            <p className="text-2xl font-bold">🌍{country.continent.name}</p>
+            <p className="text-xl md:text-2xl font-bold">
+              🌍{country.continent.name}
+            </p>
 
-            <div className="flex flex-row justify-around  w-full px-5">
+            <div className="flex flex-row md:flex-col lg:flex-row justify-between md:items-center lg:justify-around w-full px-0 md:px-5 ">
               <div className="stat w-1/4 rounded-lg px-2 py-2 flex flex-col">
-                <div className="stat-title text-base text-[#008bfcae] text-left font-bold">
+                <div className="stat-title text-sm md:text-base text-[#008bfcae] text-left font-bold">
                   Languages
                 </div>
-                <div className="stat-value text-[#000] text-3xl font-bold">
+                <div className="stat-value text-[#000] text-xl md:text-3xl font-bold">
                   {country.languages[0].name}
                 </div>
                 {country.languages.length > 1 && (
-                  <div className="stat-desc text-black font-semibold">
+                  <div className="stat-desc text-black font-semibold text-xs">
                     {country.languages
-                      .slice(1)
+                      .slice(1, 3)
                       .map((language) => language.name)
                       .join(", ")}
                   </div>
                 )}
               </div>
 
-              <div className="stat w-1/4 rounded-lg px-2 py-2 flex flex-col">
-                <div className="stat-title text-base text-[#008bfcae] text-left font-bold">
+              <div className="stat w-1/4 rounded-lg px-2 py-2 flex flex-col h-fit">
+                <div className="stat-title text-sm md:text-base text-[#008bfcae] text-left font-bold">
                   Currency
                 </div>
-                <div className="stat-value text-[#000] text-3xl font-bold">
+                <div className="stat-value text-[#000] text-xl md:text-3xl font-bold">
                   {country.currency.split(",")[0]}
                 </div>
                 {country.currency.split(",").length > 1 && (
                   <div className="stat-desc text-black font-semibold">
-                    {country.currency.split(",").slice(1).join(", ")}
+                    {country.currency.split(",").slice(1, 4).join(", ")}
                   </div>
                 )}
               </div>
 
-              <div className="stat w-1/4 rounded-lg px-2 py-2 flex flex-col">
-                <div className="stat-title text-base text-[#008bfcae] text-left font-bold">
+              <div className="stat w-1/4 rounded-lg px-2 py-2 flex flex-col ">
+                <div className="stat-title text-sm md:text-base text-[#008bfcae] text-left font-bold">
                   Phone Code
                 </div>
-                <div className="stat-value text-[#000] text-3xl font-bold">
+                <div className="stat-value text-[#000] text-xl md:text-3xl font-bold">
                   +{country.phone}
                 </div>
               </div>

@@ -9,8 +9,8 @@ function App() {
 
   return (
     <div className="App">
-      <main className="App-header h-screen p-10">
-        <div className="flex flex-row justify-between px-10 py-5 w-full h-full">
+      <main className="App-header">
+        <div className="flex flex-col md:flex-row justify-between md:justify-between items-center md:items-stretch px-0 md:px-10 w-screen h-full overflow-y-scroll overflow-x-hidden absolute inset-0 p-10">
           <CountriesList
             selectedCountry={selectedCountry}
             setSelectedCountry={setSelectedCountry}
